@@ -5,7 +5,8 @@ from unittest import main
 # Test your function by calling it here
 demographic_data_analyzer.calculate_demographic_data()
 # Read data from file
-    df = pd.read_csv("C:/Users/pc/Free Code Camp Folder/Data Analysis with Python Folder/Project practice/adult.data.csv")
+    df = pd.read_csv("
+    adult.data.csv")
 
     # How many of each race are represented in this dataset? This should be a Pandas series with race names as the index labels.
     rr=df.groupby("race")
