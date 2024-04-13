@@ -10,8 +10,8 @@ def calculate_demographic_data(print_data=True):
     race_count = rr["race"].count()
 
     # What is the average age of men?
-    qq=df.set_index("sex").loc['Male', ["age"]]
-    average_age_men = round(qq.mean(), 1)
+    qq=df["age"].loc[df["sex"] == "Male"].mean()
+    average_age_men = round(qq,1)
 
     # What is the percentage of people who have a Bachelor's degree?
     bb=df["education"].count()
