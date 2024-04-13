@@ -3,35 +3,49 @@ import pandas as pd
 
 def calculate_demographic_data(print_data=True):
     # Read data from file
-    df = None
+    df = pd.read_csv("C:/Users/pc/Free Code Camp Folder/Data Analysis with Python Folder/Project practice/adult.data.csv")
 
     # How many of each race are represented in this dataset? This should be a Pandas series with race names as the index labels.
-    race_count = None
+    rr=df.groupby("race")
+    race_count = rr["race"].count()
 
     # What is the average age of men?
-    average_age_men = None
+    qq=df.set_index("sex").loc['Male', ["age"]]
+    average_age_men = round(qq.mean(), 10)
 
     # What is the percentage of people who have a Bachelor's degree?
-    percentage_bachelors = None
+    bb=df["education"].count()
+    
+    hh=df.groupby("education")
+    pp=hh["education"].count()["Bachelors"]
+    percentage_bachelors = round(pp/bb*100, 10)
 
     # What percentage of people with advanced education (`Bachelors`, `Masters`, or `Doctorate`) make more than 50K?
     # What percentage of people without advanced education make more than 50K?
 
     # with and without `Bachelors`, `Masters`, or `Doctorate`
-    higher_education = None
-    lower_education = None
+    higher_education = df.set_index("education").loc[["Bachelors", "Masters", "Doctorate"]]
+    lower_education = df.set_index("education").drop(["Bachelors", "Masters", "Doctorate"])
 
     # percentage with salary >50K
-    higher_education_rich = None
-    lower_education_rich = None
+    aa=higher_education["salary"].loc[higher_education["salary"] == ">50K"].count()
+    c=df.groupby("education")["education"].count()
+    cc=c[["Bachelors", "Masters", "Doctorate"]].sum()
+    higher_education_rich = round(aa/cc*100, 10)
+
+    dd=lower_education["salary"].loc[lower_education["salary"]==">50K"].count()
+    cx=c.drop(["Bachelors", "Masters", "Doctorate"]).sum()
+    lower_education_rich = round(dd/cx*100, 10)
 
     # What is the minimum number of hours a person works per week (hours-per-week feature)?
-    min_work_hours = None
+    min_work_hours = round(df["hours-per-week"].min(),10)
 
     # What percentage of the people who work the minimum number of hours per week have a salary of >50K?
-    num_min_workers = None
+    ii=df["hours-per-week"].loc[df["hours-per-week"]==df["hours-per-week"].min()]
+    num_min_workers = ii.count()
+    jj=ii.loc[df["salary"]==">50K"].count()
 
-    rich_percentage = None
+    rich_percentage = round(jj/ii.count()*100,10)
 
     # What country has the highest percentage of people that earn >50K?
     highest_earning_country = None
