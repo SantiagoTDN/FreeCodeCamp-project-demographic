@@ -11,7 +11,7 @@ def calculate_demographic_data(print_data=True):
 
     # What is the average age of men?
     qq=df.set_index("sex").loc['Male', ["age"]]
-    average_age_men = round(qq.mean(), 10)
+    average_age_men = round(qq.mean(), 1)
 
     # What is the percentage of people who have a Bachelor's degree?
     bb=df["education"].count()
@@ -31,21 +31,21 @@ def calculate_demographic_data(print_data=True):
     aa=higher_education["salary"].loc[higher_education["salary"] == ">50K"].count()
     c=df.groupby("education")["education"].count()
     cc=c[["Bachelors", "Masters", "Doctorate"]].sum()
-    higher_education_rich = round(aa/cc*100, 10)
+    higher_education_rich = round(aa/cc*100, 1)
 
     dd=lower_education["salary"].loc[lower_education["salary"]==">50K"].count()
     cx=c.drop(["Bachelors", "Masters", "Doctorate"]).sum()
-    lower_education_rich = round(dd/cx*100, 10)
+    lower_education_rich = round(dd/cx*100, 1)
 
     # What is the minimum number of hours a person works per week (hours-per-week feature)?
-    min_work_hours = round(df["hours-per-week"].min(),10)
+    min_work_hours = round(df["hours-per-week"].min(),1)
 
     # What percentage of the people who work the minimum number of hours per week have a salary of >50K?
     ii=df["hours-per-week"].loc[df["hours-per-week"]==df["hours-per-week"].min()]
     num_min_workers = ii.count()
     jj=ii.loc[df["salary"]==">50K"].count()
 
-    rich_percentage = round(jj/ii.count()*100,10)
+    rich_percentage = round(jj/ii.count()*100,1)
 
     # What country has the highest percentage of people that earn >50K?
     k=df.groupby("native-country")["native-country"].count()
@@ -53,7 +53,7 @@ def calculate_demographic_data(print_data=True):
     ll=l.groupby("native-country")["native-country"].count()
     lk=ll/k*100
     highest_earning_country = lk.idxmax()
-    highest_earning_country_percentage = round(lk.max(),10)
+    highest_earning_country_percentage = round(lk.max(),1)
 
     # Identify the most popular occupation for those who earn >50K in India.
     m=l.loc[df["native-country"]=="India"]
