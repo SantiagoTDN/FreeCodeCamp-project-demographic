@@ -3,7 +3,7 @@ import pandas as pd
 
 def calculate_demographic_data(print_data=True):
     # Read data from file
-    df = pd.read_csv("/workspace/boilerplate-demographic-data-analyzer/adult.data.csv")
+    df = pd.read_csv("/workspace/FreeCodeCamp-project-demographic/adult.data.csv")
 
     # How many of each race are represented in this dataset? This should be a Pandas series with race names as the index labels.
     rr=df.groupby("race")
